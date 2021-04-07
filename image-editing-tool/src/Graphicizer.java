@@ -135,6 +135,40 @@ public class Graphicizer extends Frame implements ActionListener {
                 bufferedImage.createGraphics().drawImage(image, 0, 0, this);
                 repaint();
             }
+        } else if (e.getSource() == buttonArr[1]) { // sharpening
+            if (bufferedImage != null) {
+                bufferedImageBackup = bufferedImage;
+                Kernel kernel = new Kernel(3, 3,
+                        new float[] { 0.0f, -1.0f, 0.0f, -1.0f, 5.0f, -1.0f, 0.0f, -1.0f, 0.0f });
+                ConvolveOp convolveOp = new ConvolveOp(kernel, ConvolveOp.EDGE_NO_OP, null);
+                BufferedImage temp = new BufferedImage(bufferedImage.getWidth(), bufferedImage.getHeight(),
+                        BufferedImage.TYPE_INT_ARGB);
+                convolveOp.filter(bufferedImage, temp);
+                bufferedImage = temp;
+                repaint();
+            }
+        } else if (e.getSource() == buttonArr[2]) { // brightening
+            if (bufferedImage != null) {
+                bufferedImageBackup = bufferedImage;
+                Kernel kernel = new Kernel(1, 1, new float[] { 3 });
+                ConvolveOp convolveOp = new ConvolveOp(kernel);
+                BufferedImage temp = new BufferedImage(bufferedImage.getWidth(), bufferedImage.getHeight(),
+                        BufferedImage.TYPE_INT_ARGB);
+                convolveOp.filter(bufferedImage, temp);
+                bufferedImage = temp;
+                repaint();
+            }
+        } else if (e.getSource() == buttonArr[3]) { // blur
+            if (bufferedImage != null) {
+                bufferedImageBackup = bufferedImage;
+                Kernel kernel = new Kernel(3, 3, new float[] { .25f, 0, .25f, 0, 0, 0, .25f, 0, .25f });
+                ConvolveOp convolveOp = new ConvolveOp(kernel);
+                BufferedImage temp = new BufferedImage(bufferedImage.getWidth(), bufferedImage.getHeight(),
+                        BufferedImage.TYPE_INT_ARGB);
+                convolveOp.filter(bufferedImage, temp);
+                bufferedImage = temp;
+                repaint();
+            }
         }
     }
 
