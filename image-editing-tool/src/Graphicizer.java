@@ -169,6 +169,33 @@ public class Graphicizer extends Frame implements ActionListener {
                 bufferedImage = temp;
                 repaint();
             }
+        } else if (e.getSource() == buttonArr[4]) { // reduce
+            if (bufferedImage != null) {
+                bufferedImageBackup = bufferedImage;
+                image = bufferedImage.getScaledInstance(bufferedImage.getWidth() / 2, bufferedImage.getHeight() / 2, 0);
+
+                bufferedImage = new BufferedImage(bufferedImage.getWidth() / 2, bufferedImage.getHeight() / 2,
+                        BufferedImage.TYPE_INT_BGR);
+                bufferedImage.createGraphics().drawImage(image, 0, 0, this);
+                setSize(getInsets().left + getInsets().right + Math.max(400, bufferedImage.getWidth() + 60),
+                        getInsets().top + getInsets().bottom + Math.max(340, bufferedImage.getHeight() + 60));
+                for (int i = 0, x = 30; i < buttonArr.length; i++, x += 70) {
+                    buttonArr[i].setBounds(x, getHeight() - 30, 60, 20);
+                }
+                repaint();
+            }
+        } else if (e.getSource() == menuItemArr[2]) {
+            if (bufferedImageBackup != null) {
+                bufferedImage = bufferedImageBackup;
+                setSize(getInsets().left + getInsets().right + Math.max(400, bufferedImage.getWidth() + 60),
+                        getInsets().top + getInsets().bottom + Math.max(340, bufferedImage.getHeight() + 60));
+                for (int i = 0, x = 30; i < buttonArr.length; i++, x += 70) {
+                    buttonArr[i].setBounds(x, getHeight() - 50, 60, 20);
+                }
+                repaint();
+            }
+        } else if (e.getSource() == menuItemArr[3]) {
+            System.exit(0);
         }
     }
 
