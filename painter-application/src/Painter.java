@@ -1,35 +1,22 @@
 import java.awt.*;
 import java.awt.event.*;
 
-public class Painter extends Frame
-    implements ActionListener, MouseListener, MouseMotionListener, ItemListener {
+public class Painter extends Frame implements ActionListener, MouseMotionListener, MouseListener, ItemListener {
   private static final long serialVersionUID = 1L;
   private MenuBar menubar;
   private Menu menu1, menu2, menu3;
   private MenuItem newMenuItem, openMenuItem, saveMenuItem, colourMenuItem, exitMenuItem;
-  private CheckboxMenuItem linesMenuItem,
-      ellipsesMenuItem,
-      rectanglesMenuItem,
-      roundMenuItem,
-      freehandMenuItem;
+  private CheckboxMenuItem linesMenuItem, ellipsesMenuItem, rectanglesMenuItem, roundMenuItem, freehandMenuItem;
 
   public Painter() {
     setLayout(null);
     addMouseListener(this);
     addMouseMotionListener(this);
-    addWindowListener(
-        new WindowAdapter() {
-          public void windowClosing(WindowEvent e) {
-            dispose();
-          }
-        });
-    generateMenuBar();
-    setVisible(true);
-    setSize(400, 400);
-  }
-
-  private void generateMenuBar() {
-
+    addWindowListener(new WindowAdapter() {
+      public void windowClosing(WindowEvent e) {
+        System.exit(0);
+      }
+    });
     menubar = new MenuBar();
     menu1 = new Menu("File");
     menu2 = new Menu("Draw");
@@ -51,6 +38,8 @@ public class Painter extends Frame
     menubar.add(menu2);
     menubar.add(menu3);
     setMenuBar(menubar);
+    setVisible(true);
+    setSize(400, 400);
   }
 
   private CheckboxMenuItem initCheckBoxMenuItem(String name, Menu menu) {
@@ -120,5 +109,6 @@ public class Painter extends Frame
   }
 
   @Override
-  public void itemStateChanged(ItemEvent e) {}
+  public void itemStateChanged(ItemEvent e) {
+  }
 }
