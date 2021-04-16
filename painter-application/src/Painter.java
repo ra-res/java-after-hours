@@ -6,7 +6,9 @@ public class Painter extends Frame implements ActionListener, MouseMotionListene
   private MenuBar menubar;
   private Menu menu1, menu2, menu3;
   private MenuItem newMenuItem, openMenuItem, saveMenuItem, colourMenuItem, exitMenuItem;
-  private CheckboxMenuItem linesMenuItem, ellipsesMenuItem, rectanglesMenuItem, roundMenuItem, freehandMenuItem;
+  private CheckboxMenuItem linesMenuItem, ellipsesMenuItem, rectanglesMenuItem, roundMenuItem, freehandMenuItem,
+      thickMenuItem, shadowMenuItem, textMenuItem, transparentMenuItem, textureMenuItem, gradientMenuItem,
+      solidMenuItem, plainMenuItem;
 
   public Painter() {
     setLayout(null);
@@ -33,6 +35,14 @@ public class Painter extends Frame implements ActionListener, MouseMotionListene
     rectanglesMenuItem = initCheckBoxMenuItem("Draw ellipses", menu2);
     roundMenuItem = initCheckBoxMenuItem("Draw round rectangles", menu2);
     freehandMenuItem = initCheckBoxMenuItem("Draw freehand", menu2);
+    plainMenuItem = initCheckBoxMenuItem("Draw freehand", menu3);
+    solidMenuItem = initCheckBoxMenuItem("Solid fill", menu3);
+    gradientMenuItem = initCheckBoxMenuItem("Gradient fill", menu3);
+    textureMenuItem = initCheckBoxMenuItem("Texture fill", menu3);
+    transparentMenuItem = initCheckBoxMenuItem("Transparent", menu3);
+    textMenuItem = initCheckBoxMenuItem("Draw text", menu2);
+    thickMenuItem = initCheckBoxMenuItem("Draw thick lines", menu3);
+    shadowMenuItem = initCheckBoxMenuItem("Drop shadow", menu3);
 
     menubar.add(menu1);
     menubar.add(menu2);
