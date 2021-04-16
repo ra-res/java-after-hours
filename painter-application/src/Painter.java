@@ -1,14 +1,22 @@
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.*;
+import java.io.File;
 
 public class Painter extends Frame implements ActionListener, MouseMotionListener, MouseListener, ItemListener {
   private static final long serialVersionUID = 1L;
+  private FileDialog dialog;
   private MenuBar menubar;
   private Menu menu1, menu2, menu3;
   private MenuItem newMenuItem, openMenuItem, saveMenuItem, colourMenuItem, exitMenuItem;
   private CheckboxMenuItem linesMenuItem, ellipsesMenuItem, rectanglesMenuItem, roundMenuItem, freehandMenuItem,
       thickMenuItem, shadowMenuItem, textMenuItem, transparentMenuItem, textureMenuItem, gradientMenuItem,
       solidMenuItem, plainMenuItem;
+  private BufferedImage bufferedImage, image;
+  private int imageHeight, imageWidth;
+  private TextDialog textDialog;
+  private ImageIO tileImage;
 
   public Painter() {
     setLayout(null);
@@ -48,8 +56,27 @@ public class Painter extends Frame implements ActionListener, MouseMotionListene
     menubar.add(menu2);
     menubar.add(menu3);
     setMenuBar(menubar);
-    setVisible(true);
+
+    dialog = new FileDialog(this, "File Dialog");
+    bufferedImage = new BufferedImage(imageWidth, imageHeight, BufferedImage.TYPE_INT_BGR);
+
+    image = createImage(imageWidth, imageHeight);
+    textDialog = new OkCancelDialog(this, "Enter your text", true);
+    try {
+      File inputFile = new File("tile.jpg");
+      tileImage = ImageIO.read(inputFile);
+    } catch (java.io.IOException ioe) {
+      System.out.println("Need tile.jpg.");
+      System.exit(0);
+    }
+    this.addWindowListener(new WindowAdapter() {
+      public void windowClosing(WindowEvent e) {
+        System.exit(0);
+      }
+    });
     setSize(400, 400);
+    setTitle("Painter");
+    setVisible(true);
   }
 
   private CheckboxMenuItem initCheckBoxMenuItem(String name, Menu menu) {
